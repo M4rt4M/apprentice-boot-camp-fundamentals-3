@@ -13,28 +13,35 @@ let TaxCalculator = class TaxCalculator {
   }
 
   calculateTax(vehicle) {
-    const {co2Emissions, fuelType} = vehicle;
     let taxPrice;
-    const petrolPrice = {
-      0: 0,
-      1: 10,
-      51: 25,
-      76: 105,
-      91: 125,
-      101: 145,
-      111: 165,
-      131: 205,
-      151: 515,
-      171: 830,
-      191: 1240,
-      226: 1760,
-      256: 2070
-    }
+    const {co2Emissions, fuelType} = vehicle;
 
-    const vehicleCo2= Object.keys(petrolPrice).find(element => co2Emissions >= element);
-    taxPrice=petrolPrice[vehicleCo2];
+    const taxPrices = {
+      'Petrol' : {
+        256: 2070,
+        226: 1760,
+        191: 1240,
+        171: 830,
+        151: 515,
+        131: 205,
+        111: 165,
+        101: 145,
+        91: 125,
+        76: 105,
+        51: 25,
+        1: 10,
+        0: 0
+      }
+    }
+    
+    const vehicleCo2 = Object.keys(taxPrices[fuelType])
+            .sort((a,b) => b - a)
+            .find(element => co2Emissions >= element);
+
+    taxPrice = taxPrices[fuelType][vehicleCo2];
 
     return taxPrice;
+    // throw new Error('You have to implement the method doSomething!');
   }
 }
 
