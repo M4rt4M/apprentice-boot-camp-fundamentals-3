@@ -2,7 +2,7 @@ const { DummyTaxCalculator } = require('./dummy-tax-calculator');
 const { Vehicle } = require('../vehicle');
 const { FuelType } = require('../fuel-type');
 
-describe.skip('Tax calculator on a petrol vehicle for the first year', () => {
+describe('Tax calculator on a petrol vehicle for the first year', () => {
   let taxCalculator = new DummyTaxCalculator();
   let FIRST_OF_JAN_2020 = new Date(2020, 1, 1);
 
