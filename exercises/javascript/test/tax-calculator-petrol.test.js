@@ -1,9 +1,11 @@
 const { DummyTaxCalculator } = require('./dummy-tax-calculator');
 const { Vehicle } = require('../vehicle');
+const { TaxCalculator } = require('../tax-calculator');
 const { FuelType } = require('../fuel-type');
 
 describe('Tax calculator on a petrol vehicle for the first year', () => {
-  let taxCalculator = new DummyTaxCalculator();
+  //let taxCalculator = new DummyTaxCalculator();
+  let taxCalculator = new TaxCalculator(2019);
   let FIRST_OF_JAN_2020 = new Date(2020, 1, 1);
 
   it('should return zero for zero grams of CO2 emissions', () => {
