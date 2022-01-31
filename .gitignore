@@ -1,0 +1,17 @@
+# C-sharp/vscode ignores
+.vs
+.vscode
+bin
+obj
+
+**/.idea
+*.iml
+
+docs/_site
+docs/Gemfile.lock
+
+exercises/java/out
+exercises/java/.gradle
+exercises/java/build/
+
+*.pyc
