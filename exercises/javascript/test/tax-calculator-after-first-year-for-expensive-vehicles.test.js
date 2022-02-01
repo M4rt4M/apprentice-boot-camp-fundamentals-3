@@ -1,9 +1,10 @@
 const { DummyTaxCalculator } = require('./dummy-tax-calculator');
 const { Vehicle } = require('../vehicle');
 const { FuelType } = require('../fuel-type');
+const { TaxCalculator } = require('../tax-calculator');
 
-describe.skip('Tax calculator on expensive vehicles over 40K after the first year', () => {
-  let taxCalculator = new DummyTaxCalculator();
+describe('Tax calculator on expensive vehicles over 40K after the first year', () => {
+  let taxCalculator = new TaxCalculator(2019, false, true);
   let FIRST_OF_APRIL_2017 = new Date(2017, 4, 1);
 
   it('subsequent years tax for petrol vehicles over 40K', () => {
@@ -21,3 +22,4 @@ describe.skip('Tax calculator on expensive vehicles over 40K after the first yea
     expect(taxCalculator.calculateTax(vehicle)).toBe(440);
   })
 })
+// 2d8a0188898a08b697789a4668ea4254e40ea8b6
