@@ -1,23 +1,39 @@
 let TaxCalculator = class TaxCalculator {
-  constructor(year) {
+  constructor(year, storyFour = false) {
     if (year === undefined) {
       let date = new Date();
       this.year = date.getFullYear();
     } else {
       this.year = year;
     }
+    this.storyFour = storyFour;
   }
 
   getYear() {
     return this.year;
   }
 
+  calculate2ndYear(vehicle) {
+    const taxPricesfrom2ndYear = {
+      'Petrol': 140,
+      'Diesel': 140,
+      'Electric': 0,
+      'Alternative fuel': 130
+    };
+    if (this.storyFour) {
+      const { fuelType } = vehicle; 
+      let taxPrice;
+      taxPrice = taxPricesfrom2ndYear[fuelType];
+      return taxPrice;
+    }
+  }
+
   calculateTax(vehicle) {
     let taxPrice;
-    const {co2Emissions, fuelType} = vehicle;
+    const { co2Emissions, fuelType } = vehicle;
 
     const taxPrices = {
-      'Petrol' : {
+      'Petrol': {
         256: 2070,
         226: 1760,
         191: 1240,
@@ -30,9 +46,9 @@ let TaxCalculator = class TaxCalculator {
         76: 105,
         51: 25,
         1: 10,
-        0: 0
+        0: 0,
       },
-      'Diesel' : {
+      'Diesel': {
         226: 2070,
         191: 1760,
         171: 1240,
@@ -43,10 +59,10 @@ let TaxCalculator = class TaxCalculator {
         91: 145,
         76: 125,
         51: 105,
-        1:25,
-        0:0
-      }, 
-      'Alternative fuel' : {
+        1: 25,
+        0: 0,
+      },
+      'Alternative fuel': {
         256: 2060,
         226: 1750,
         191: 1230,
@@ -59,22 +75,22 @@ let TaxCalculator = class TaxCalculator {
         76: 95,
         51: 15,
         1: 0,
-        0: 0
+        0: 0,
       },
-      'Electric' : {
-        0: 0
-      }
-    }
-    
+      'Electric': {
+        0: 0,
+      },
+    };
+
     const vehicleCo2 = Object.keys(taxPrices[fuelType])
-            .sort((a,b) => b - a)
-            .find(element => co2Emissions >= element);
+      .sort((a, b) => b - a)
+      .find((element) => co2Emissions >= element);
 
     taxPrice = taxPrices[fuelType][vehicleCo2];
 
     return taxPrice;
     // throw new Error('You have to implement the method doSomething!');
   }
-}
+};
 
 module.exports = { TaxCalculator: TaxCalculator }
