@@ -10,16 +10,16 @@ describe('Tax calculator on vehicles after the first year', () => {
 
   it('subsequent years tax for petrol', () => {
     const vehicle = new Vehicle(206, FuelType.PETROL, FIRST_OF_APRIL_2017, 20000);
-    expect(taxCalculator.calculate2ndYear(vehicle)).toBe(140);
+    expect(taxCalculator.calculateTax(vehicle)).toBe(140);
   })
 
   it('subsequent years tax for electric', () => {
     const vehicle = new Vehicle(206, FuelType.ELECTRIC, FIRST_OF_APRIL_2017, 20000);
-    expect(taxCalculator.calculate2ndYear(vehicle)).toBe(0);
+    expect(taxCalculator.calculateTax(vehicle)).toBe(0);
   })
 
   it('subsequent years tax for alternative fuel', () => {
     const vehicle = new Vehicle(206, FuelType.ALTERNATIVE_FUEL, FIRST_OF_APRIL_2017, 20000);
-    expect(taxCalculator.calculate2ndYear(vehicle)).toBe(130);
+    expect(taxCalculator.calculateTax(vehicle)).toBe(130);
   })
 })

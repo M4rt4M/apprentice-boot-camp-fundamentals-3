@@ -12,9 +12,9 @@ let TaxCalculator = class TaxCalculator {
     return this.year;
   }
 
-  isFirstYear(dateOfFirstRegistration) {
-    return dateOfFirstRegistration.getFullYear === this.year
-  }
+  //isFirstYear(dateOfFirstRegistration) {
+  //  return dateOfFirstRegistration.getFullYear === this.year
+  //}
   
   calculate2ndYear(vehicle) {
     const taxPricesfrom2ndYear = {
@@ -35,22 +35,38 @@ let TaxCalculator = class TaxCalculator {
     let taxPrice;
     const {co2Emissions, fuelType, dateOfFirstRegistration, listPrice} = vehicle;
 
-      if(listPrice >= 40000 && !this.isFirstYear(dateOfFirstRegistration)) {
-        switch(fuelType) {
-          case 'Petrol':
-          case 'Diesel':
+    const isFirstYear = dateOfFirstRegistration.getFullYear() == 2020;
+
+    console.log('this.year ', this.year, ' dateOfFirstRegistration ', dateOfFirstRegistration.getFullYear()); 
+    if (listPrice > 40000 && !isFirstYear) {
+        switch (fuelType) {
+          case "Petrol":
+          case "Diesel":
             taxPrice = 450;
             break;
-          case 'Electric':
+          case "Electric":
             taxPrice = 310;
             break;
-          case 'Alternative fuel':
+          case "Alternative fuel":
             taxPrice = 440;
             break;
         }
-      } else {
+    } else if ( listPrice <= 40000 && !isFirstYear) {
+        switch (fuelType) {
+          case "Petrol":
+          case "Diesel":
+            taxPrice = 140;
+            break;
+          case "Electric":
+            taxPrice = 0;
+            break;
+          case "Alternative fuel":
+            taxPrice = 130;
+            break;
+        }
+    } else {
         const taxPrices = {
-          'Petrol' : {
+          'Petrol': {
             256: 2070,
             226: 1760,
             191: 1240,
@@ -63,9 +79,9 @@ let TaxCalculator = class TaxCalculator {
             76: 105,
             51: 25,
             1: 10,
-            0: 0
+            0: 0,
           },
-          'Diesel' : {
+          'Diesel': {
             226: 2070,
             191: 1760,
             171: 1240,
@@ -76,10 +92,10 @@ let TaxCalculator = class TaxCalculator {
             91: 145,
             76: 125,
             51: 105,
-            1:25,
-            0:0
-          }, 
-          'Alternative fuel' : {
+            1: 25,
+            0: 0,
+          },
+          'Alternative fuel': {
             256: 2060,
             226: 1750,
             191: 1230,
@@ -92,17 +108,17 @@ let TaxCalculator = class TaxCalculator {
             76: 95,
             51: 15,
             1: 0,
-            0: 0
+            0: 0,
           },
-          'Electric' : {
-            0: 0
-          }
-        }
-        
+          'Electric': {
+            0: 0,
+          },
+        };
+
         const vehicleCo2 = Object.keys(taxPrices[fuelType])
-                .sort((a,b) => b - a)
-                .find(element => co2Emissions >= element);
-    
+          .sort((a, b) => b - a)
+          .find((element) => co2Emissions >= element);
+
         taxPrice = taxPrices[fuelType][vehicleCo2];
       }
 
