@@ -1,13 +1,11 @@
 let TaxCalculator = class TaxCalculator {
-  constructor(year, storyFour = false) {
+  constructor(year) {
     if (year === undefined) {
       let date = new Date();
       this.year = date.getFullYear();
     } else {
       this.year = year;
     }
-
-    this.storyFour = storyFour;
   }
 
   getYear() {
@@ -25,12 +23,12 @@ let TaxCalculator = class TaxCalculator {
       'Electric': 0,
       'Alternative fuel': 130
     };
-    if (this.storyFour) {
-      const { fuelType } = vehicle; 
-      let taxPrice;
-      taxPrice = taxPricesfrom2ndYear[fuelType];
-      return taxPrice;
-    }
+
+    const { fuelType } = vehicle; 
+    let taxPrice;
+    taxPrice = taxPricesfrom2ndYear[fuelType];
+    return taxPrice;
+
   }
 
   calculateTax(vehicle) {

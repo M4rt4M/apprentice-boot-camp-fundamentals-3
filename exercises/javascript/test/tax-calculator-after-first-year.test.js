@@ -5,7 +5,7 @@ const { FuelType } = require('../fuel-type');
 
 describe('Tax calculator on vehicles after the first year', () => {
   //let taxCalculator = new DummyTaxCalculator();
-  let taxCalculator = new TaxCalculator(2019, true);
+  let taxCalculator = new TaxCalculator(2019);
   let FIRST_OF_APRIL_2017 = new Date(2017, 4, 1);
 
   it('subsequent years tax for petrol', () => {
